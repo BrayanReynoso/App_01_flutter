@@ -65,7 +65,7 @@ class _RecoverPasswordState extends State<RecoverPassword> {
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'Ingrese su correo electronico',
-                  labelText: 'Email',
+                  labelText: 'Ingrese su correo electronico',
                   border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.emailAddress,

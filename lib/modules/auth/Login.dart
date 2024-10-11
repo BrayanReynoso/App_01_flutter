@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/user.png', width: 200, height: 200),
+              Image.asset('assets/icon.png', width: 200, height: 200),
               const SizedBox(height: 16),
               TextFormField(
                 decoration: const InputDecoration(
