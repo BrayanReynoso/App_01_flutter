@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -11,6 +12,7 @@ class _LoginState extends State<Login> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   var _isObscure = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,9 +59,19 @@ class _LoginState extends State<Login> {
                 width: double.infinity,
                 height: 48,
                 child: ElevatedButton(
-                  onPressed: () {
-                    print('Email: ${_email.text}');
-                    print('Password: ${_password.text}');
+                  onPressed: () async {
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: _email.text, password: _password.text);
+                      Navigator.pushNamed(context, '/profile');
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        print('No user found for that email.');
+                      } else if (e.code == 'wrong-password') {
+                        print('Wrong password provided for that user.');
+                      }
+                    }
                   },
                   style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -78,7 +90,20 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     Navigator.pushNamed(context, '/recover');
                   },
-                  child: const Text('Recupear contraseña'))
+                  child: const Text('Recupear contraseña')),
+              const SizedBox(height: 16),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, '/register');
+                },
+                child: const Text(
+                  'Registrarse',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.blue),
+                ),
+              )
             ],
           ),
         ),
