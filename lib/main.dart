@@ -1,4 +1,6 @@
 import 'package:app_brm_01/modules/auth/register.dart';
+import 'package:app_brm_01/navigation/app_bar_navigation.dart' as app_bar;
+import 'package:app_brm_01/navigation/map_sample.dart';
 import 'package:app_brm_01/navigation/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -28,13 +30,16 @@ class MainApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
-        '/home': (context) => const HomeScreen(),
+        '/nav': (context) => const app_bar.AppBarNavigation(),
+        '/hme': (context) => const HomeScreen(),
         '/profile': (context) => const ProfileScreen(),
         '/register': (context) => const Register(),
         '/login': (context) => const Login(),
         '/recover': (context) => const RecoverPassword(),
         '/validation': (context) => const ValidationCode(),
         '/change': (context) => const ChangePassword(),
+        '/map' : (context) => const MapSample(),
+        
       },
     );
   }
