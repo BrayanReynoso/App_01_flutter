@@ -1,11 +1,15 @@
 import 'dart:async';
+import 'package:app_brm_01/navigation/map2.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class RestaurantDetails extends StatefulWidget {
   final String name;
   final double rating;
   final List<String> images;
   final String description;
+  final double latitude;
+  final double longitude;
 
   const RestaurantDetails({
     super.key,
@@ -13,6 +17,8 @@ class RestaurantDetails extends StatefulWidget {
     required this.rating,
     required this.images,
     required this.description,
+    required this.latitude,
+    required this.longitude,
   });
 
   @override
@@ -99,10 +105,18 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
               ],
             ),
             const SizedBox(height: 16),
-            // Descripción
             Text(
               widget.description,
               style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 16),
+            // Map View para mostrar la ubicación
+            SizedBox(
+              height: 300,
+              child: MapView(
+                latitude: widget.latitude,
+                longitude: widget.longitude,
+              ),
             ),
           ],
         ),
